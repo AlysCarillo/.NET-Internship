@@ -12,6 +12,11 @@ namespace TreeDepthCalculator
     {
         public static int CalculateDepth(this Branch branch)
         {
+            return CalculateDepthRecursive(branch);
+        }
+
+        private static int CalculateDepthRecursive(Branch branch)
+        {
             if (branch.Branches.Count == 0)
             {
                 return 1;
@@ -20,7 +25,7 @@ namespace TreeDepthCalculator
             int maxDepth = 0;
             foreach (var child in branch.Branches)
             {
-                int depth = child.CalculateDepth();
+                int depth = CalculateDepthRecursive(child);
                 if (depth > maxDepth)
                 {
                     maxDepth = depth;
