@@ -42,6 +42,37 @@ namespace TreeDepthCalculator
             return current;
         }
 
-        
+        public void DisplayTree()
+        {
+            DisplayTree(root, 0);
+        }
+
+        private void DisplayTree(Node node, int level)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            DisplayTree(node.Right, level + 1);
+
+            Console.WriteLine();
+            if (node == root)
+            {
+                Console.Write("Root: ");
+            }
+            else
+            {
+                Console.Write("|");
+                for (int i = 0; i < level; i++)
+                {
+                    Console.Write("    ");
+                }
+                Console.Write("|---");
+            }
+            Console.Write(node.Value);
+
+            DisplayTree(node.Left, level + 1);
+        }
     }
 }
