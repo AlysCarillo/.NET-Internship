@@ -55,7 +55,7 @@ namespace TreeDepthCalculator.TreeStructures
                 indent += "│  ";
             }
 
-            Console.WriteLine(branch.Name);
+            Console.WriteLine(branch.Value);
 
             int childCount = branch.Branches.Count;
             for (int i = 0; i < childCount; i++)

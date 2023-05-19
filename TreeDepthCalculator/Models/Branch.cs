@@ -8,12 +8,12 @@ namespace TreeDepthCalculator.Models
 {
     public class Branch
     {
-        public string Name { get; set; }
+        public string Value { get; set; }
         public List<Branch> Branches { get; set; }
 
-        public Branch(string name)
+        public Branch(string value)
         {
-            Name = name;
+            Value = value;
             Branches = new List<Branch>();
         }
     }
