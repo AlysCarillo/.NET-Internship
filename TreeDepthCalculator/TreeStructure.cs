@@ -34,5 +34,35 @@ namespace TreeDepthCalculator
 
             return maxDepth + 1;
         }
+
+        public static void DisplayTree(this Branch branch)
+        {
+            DisplayTreeRecursive(branch, "", true);
+        }
+
+        private static void DisplayTreeRecursive(Branch branch, string indent, bool isLast)
+        {
+            Console.Write(indent);
+
+            if (isLast)
+            {
+                Console.Write("└─ ");
+                indent += "   ";
+            }
+            else
+            {
+                Console.Write("├─ ");
+                indent += "│  ";
+            }
+
+            Console.WriteLine(branch.Name);
+
+            int childCount = branch.Branches.Count;
+            for (int i = 0; i < childCount; i++)
+            {
+                bool lastChild = (i == childCount - 1);
+                DisplayTreeRecursive(branch.Branches[i], indent, lastChild);
+            }
+        }
     }
 }
