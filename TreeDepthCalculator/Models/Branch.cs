@@ -16,23 +16,5 @@ namespace TreeDepthCalculator.Models
             Name = name;
             Branches = new List<Branch>();
         }
-
-        public override string ToString()
-        {
-            return ToStringHelper(this, "");
-        }
-
-        private string ToStringHelper(Branch branch, string indent)
-        {
-            string result = $"{indent}{branch.Name}\n";
-            string childIndent = indent + "   ";
-
-            foreach (var child in branch.Branches)
-            {
-                result += ToStringHelper(child, childIndent);
-            }
-
-            return result;
-        }
     }
 }
