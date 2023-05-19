@@ -1,4 +1,5 @@
 ﻿using TreeDepthCalculator.Models;
+using TreeDepthCalculator.TreeStructures;
 
 namespace TreeDepthCalculator
 {
@@ -9,40 +10,35 @@ namespace TreeDepthCalculator
             // Create the tree structure
             Branch root = new Branch("50");
 
-            Branch d1child1 = new Branch("25");
-            Branch d1child2 = new Branch("65");
-            Branch d2child3 = new Branch("15");
-            Branch d2child4 = new Branch("66");
-            Branch d2child5 = new Branch("70");
-            Branch d2child6 = new Branch("75");
-            Branch d3child7 = new Branch("67");
-            Branch d3child8 = new Branch("71");
-            Branch d3child9 = new Branch("73");
-            Branch d4child10 = new Branch("72");
+            Branch child25 = new Branch("25");
+            child25.Branches.Add(new Branch("15"));
 
-            root.Branches.Add(d1child1);
-            root.Branches.Add(d1child2);
+            Branch child65 = new Branch("65");
+            child65.Branches.Add(new Branch("66")
+            {
+                Branches = { new Branch("67") }
+            });
+            child65.Branches.Add(new Branch("70")
+            {
+                Branches =
+                {
+                    new Branch("71")
+                    {
+                        Branches = { new Branch("72") }
+                    },
+                    new Branch("73")
+                }
+            });
+            child65.Branches.Add(new Branch("75"));
 
-            d1child1.Branches.Add(d2child3);
+            root.Branches.Add(child25);
+            root.Branches.Add(child65);
 
-            d1child2.Branches.Add(d2child4);
-            d1child2.Branches.Add(d2child5);
-            d1child2.Branches.Add(d2child6);
+            // Display the tree
+            ITreeStructure treeStructure = new TreeStructure();
+            treeStructure.DisplayTree(root);
 
-            d2child4.Branches.Add(d3child7);
-
-            d2child5.Branches.Add(d3child8);
-            d2child5.Branches.Add(d3child9);
-
-            d3child8.Branches.Add(d4child10);
-
-            // Calculate the depth of the tree using recursion
-            int depth = root.CalculateDepth();
-
-            // Display the depth of the tree
-            Console.WriteLine($"Depth of the tree: {depth}");
-
-            Console.WriteLine(root);
+            Console.WriteLine($"\nDepth of the tree: {treeStructure.CalculateDepth(root)}");
         }
     }
 }
